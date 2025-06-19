@@ -10,11 +10,26 @@ export default function SignupForm({ setView, view }) {
           <div className="signup-user">
             <div className="form-box">
               <h3>SIGNUP USER</h3>
-              <input placeholder="Email" /><br /><br />
-              <input placeholder="Password" type="password" /><br /><br />
-              <input placeholder="Hospital" type="text" /><br /><br />
-              <input placeholder="Role" type="text" /><br /><br />
-              <button className="submit">Register</button>
+              <input id="Name-User" placeholder="Name" type="text"/><br /><br />
+              <input placeholder="Email" id="UserEmail" type="text"/><br /><br />
+              <input placeholder="Password" id="UserPass" type="password" /><br /><br />
+              <input placeholder="Hospital" type="text" id="UserHos" /><br /><br />
+              <input placeholder="Role" type="text" id="UserRole" /><br /><br />
+              <button className="submit" onClick={()=>{
+                var url = "https://localhost:44354/signup/signup/userRequest"
+                var payload = {
+                  Name : document.getElementById("Name-User").value,
+                  Email : document.getElementById("UserEmail").value,
+                  Password : document.getElementById("UserPass").value,
+                  RequestedRoleId : document.getElementById("UserHos").value,
+                  TargetHospitalId : document.getElementById("UserRole").value
+                }
+                console.log(payload);
+                axios
+                  .post(url,payload)
+                  .then((response)=>console.log(response))
+                  .catch((error)=>console.error(error));
+              }}>Register</button>
             </div>
           </div>
           <div className="signup-hospital">
